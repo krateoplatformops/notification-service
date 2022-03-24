@@ -1,4 +1,5 @@
 FROM bitnami/node
+LABEL maintainer "Krateo <contact@krateoplatformops.io>"
 
 # Create app directory
 WORKDIR /usr/src/app
