@@ -1,6 +1,6 @@
 registry:
   images:
-    app: ghcr.io/krateoplatformops/socket-service:latest
+    socket: ghcr.io/krateoplatformops/socket-service:latest
 
 log:
   level: "info"
