@@ -1,0 +1,9 @@
+registry:
+  images:
+    app: ghcr.io/krateoplatformops/socket-service:latest
+
+log:
+  level: "info"
+
+socket:
+  host: "socket.krateo.site"

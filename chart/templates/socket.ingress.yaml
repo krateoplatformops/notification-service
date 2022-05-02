@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: socket-ingress
+  labels:
+  annotations:
+    kubernetes.io/ingress.class: 'kong'
+spec:
+  rules:
+    - host: {{ .Values.socket.host }}
+      http:
+        paths:
+          - path: /*
+            pathType: Prefix
+            backend:
+              service:
+                name: socket-svc
+                port:
+                  number: 80
