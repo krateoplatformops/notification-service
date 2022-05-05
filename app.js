@@ -31,8 +31,8 @@ app.use('/', statusRoutes)
 
 app.post('/', (req, res) => {
   logger.debug(JSON.stringify(req.body))
-  io.sockets.emit(req.body.transactionId, {
-    transactionId: req.body.transactionId
+  io.sockets.emit(req.body.deploymentId, {
+    deploymentId: req.body.deploymentId
   })
   res.status(200).json({ message: 'ok' })
 })
