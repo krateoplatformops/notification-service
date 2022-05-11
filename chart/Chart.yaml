@@ -1,5 +1,5 @@
 apiVersion: v2
-name: api-krateo
+name: socket-service
 description: Krateo PlatformOps Socket Service
 type: application
 
