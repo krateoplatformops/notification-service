@@ -2,6 +2,7 @@ apiVersion: v2
 name: socket-service
 description: Krateo PlatformOps Socket Service
 type: application
+icon: "https://github.com/krateoplatformops/community/blob/main/logos/black/icon.svg"
 
 version: VERSION
 appVersion: VERSION
