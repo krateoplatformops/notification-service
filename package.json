@@ -1,6 +1,6 @@
 {
   "name": "socket-service",
-  "version": "0.1.1",
+  "version": "VERSION",
   "description": "Krateo Socket Service",
   "main": "server.js",
   "scripts": {
