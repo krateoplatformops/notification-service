@@ -36,6 +36,12 @@ app.post('/', (req, res) => {
     io.sockets.emit(req.body.deploymentId, {
       deploymentId: req.body.deploymentId
     })
+    io.sockets.emit('notifications', {
+      message: req.body.message,
+      ref: {
+        deploymentId: req.body.deploymentId
+      }
+    })
   } else {
     io.sockets.emit('notifications', {
       ...req.body
