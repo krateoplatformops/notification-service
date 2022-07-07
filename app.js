@@ -32,21 +32,15 @@ app.use('/', statusRoutes)
 app.post('/', (req, res) => {
   logger.debug(JSON.stringify(req.body))
 
-  if (req.body.deploymentId) {
-    io.sockets.emit(req.body.deploymentId, {
-      deploymentId: req.body.deploymentId
-    })
-    io.sockets.emit('notifications', {
-      message: req.body.message,
-      ref: {
-        deploymentId: req.body.deploymentId
-      }
-    })
-  } else {
-    io.sockets.emit('notifications', {
-      ...req.body
-    })
+  const payload = {
+    message: req.body.message
   }
+  if (req.body.deploymentId) {
+    payload.ref.deploymentId = req.body.deploymentId
+  }
+  io.sockets.emit('notifications', {
+    ...req.body
+  })
   res.status(200).json({ message: 'ok' })
 })
 
