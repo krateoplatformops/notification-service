@@ -13,6 +13,7 @@
     "axios": "^0.26.1",
     "express": "^4.17.3",
     "helmet": "^5.0.2",
+    "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
     "nats": "^2.6.1",
     "response-time": "^2.3.2",

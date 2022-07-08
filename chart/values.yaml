@@ -70,6 +70,8 @@ podEnv:
       secretKeyRef:
         name: krateo-secret
         key: MONGODB_URI
+  - name: REQUIRE_AUTHENTICATION
+    value: "true"
 
 ingress:
   enabled: true
