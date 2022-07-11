@@ -60,7 +60,9 @@ podContainerPorts:
 # put your env variables here
 podEnvFrom:
   - configMapRef:
-      name: krateo-uri-config
+    name: api-cookie-config
+  - configMapRef:
+    name: krateo-uri-config
 
 podEnv:
   - name: LOG_LEVEL
@@ -72,6 +74,11 @@ podEnv:
         key: MONGODB_URI
   - name: REQUIRE_AUTHENTICATION
     value: "true"
+  - name: "COOKIE_SECRET"
+    valueFrom:
+      secretKeyRef:
+        name: api-cookie-secret
+        key: COOKIE_SECRET
 
 ingress:
   enabled: true
