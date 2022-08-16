@@ -4,7 +4,7 @@
 replicaCount: 1
 
 image:
-  repository: ghcr.io/krateoplatformops/socket-service
+  repository: ghcr.io/krateoplatformops/notification-service
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
@@ -81,7 +81,7 @@ podEnv:
         key: COOKIE_SECRET
 
 ingress:
-  enabled: true
+  enabled: false
   annotations:
     kubernetes.io/ingress.class: kong
   host: socket.krateo.site
