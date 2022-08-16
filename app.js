@@ -1,21 +1,13 @@
 const express = require('express')
-const helmet = require('helmet')
 const cors = require('cors')({ origin: true, credentials: true })
 const { createServer } = require('http')
 const { Server } = require('socket.io')
 const { logger } = require('./helpers/logger.helpers')
-const { parse } = require('cookie')
-const cookieParser = require('cookie-parser')
-const jwtHelpers = require('./helpers/jwt.helpers')
-const { envConstants } = require('./constants')
 
 const app = express()
-app.use(helmet())
 app.use(cors)
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
-
-const requireAuthentication = envConstants.REQUIRE_AUTHENTICATION === 'true'
 
 const options = {
   cors: {
@@ -54,25 +46,7 @@ app.post('/', (req, res) => {
 
 app.use(errorLoggerMiddleware)
 
-io.use((socket, next) => {
-  if (!requireAuthentication) {
-    return next()
-  }
-
-  try {
-    const cookieJson = parse(socket.handshake.headers.cookie)
-    const cookieValue = cookieParser.signedCookie(
-      cookieJson[envConstants.COOKIE_NAME],
-      envConstants.COOKIE_SECRET
-    )
-    const identity = jwtHelpers.verify(cookieValue)
-    logger.debug(JSON.stringify(identity))
-    next()
-  } catch {
-    logger.error('Unauthorized')
-    next(new Error('Unauthorized'))
-  }
-}).on('connection', (socket) => {
+io.on('connection', (socket) => {
   logger.info('New client connected')
 
   socket.on('disconnect', () => {
