@@ -4,15 +4,10 @@
   "description": "Krateo Socket Service",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "husky": {
-    "hooks": {
-      "applypatch-msg": "echo \"[Husky] applypatch-msg\"",
-      "pre-applypatch": "echo \"[Husky] pre-applypatch\"",
-      "post-applypatch": "echo \"[Husky] post-applypatch\"",
-      "pre-commit": "echo \"[Husky] pre-commit\""
-    }
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install",
+    "lint": "prettier --check .",
+    "format": "prettier --write . && git add -A ."
   },
   "keywords": [],
   "author": "",
@@ -22,7 +17,6 @@
     "axios": "^0.27.2",
     "cors": "^2.8.5",
     "express": "^4.17.3",
-    "husky": "^8.0.1",
     "js-yaml": "^4.1.0",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
@@ -31,5 +25,9 @@
     "response-time": "^2.3.2",
     "socket.io": "^4.4.1",
     "winston": "^3.6.0"
+  },
+  "devDependencies": {
+    "husky": "^8.0.0",
+    "prettier": "^2.7.1"
   }
 }
