@@ -1,13 +1,16 @@
 const express = require('express')
 const cors = require('cors')({ origin: true, credentials: true })
+const responseTime = require('response-time')
 const { createServer } = require('http')
 const { Server } = require('socket.io')
-const { logger } = require('./helpers/logger.helpers')
+const logger = require('./service-library/helpers/logger.helpers')
+const validateKeys = require('object-key-validator')
 
 const app = express()
 app.use(cors)
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+app.use(responseTime({ suffix: false, digits: 0 }))
 
 const options = {
   cors: {
@@ -17,26 +20,28 @@ const options = {
   }
 }
 
+const rule = { $and: ['message', 'time', 'level', 'reason', 'source'] }
+
 const httpServer = createServer(app)
 const io = new Server(httpServer, options)
 
 /* Middlewares */
-const callLoggerMiddleware = require('./middlewares/call-logger.middleware')
-const errorLoggerMiddleware = require('./middlewares/error-logger.middleware')
+const callLoggerMiddleware = require('./service-library/middlewares/call-logger.middleware')
+const errorLoggerMiddleware = require('./service-library/middlewares/error-logger.middleware')
 
 app.use(callLoggerMiddleware)
 
-const statusRoutes = require('./routes/status.routes')
+const statusRoutes = require('./service-library/routes/status.routes')
 
 app.use('/', statusRoutes)
 
 app.post('/', (req, res) => {
-  const b = req.body
-  logger.debug(JSON.stringify(b))
-  if (!b.message || !b.source || !b.reason) {
-    res.status(400).json({
+  logger.debug(req.body)
+
+  if (!validateKeys(rule, req.body)) {
+    return res.status(400).json({
       message: 'Bad Request',
-      reason: 'Missing some required fields (message, source, reason)'
+      reason: `Missing some required fields (${rule.$and.join(', ')})`
     })
   }
 
