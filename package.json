@@ -6,6 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "echo \"[Husky] pre-commit\""
+    }
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -14,6 +19,7 @@
     "axios": "^0.27.2",
     "cors": "^2.8.5",
     "express": "^4.17.3",
+    "husky": "^8.0.1",
     "js-yaml": "^4.1.0",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
