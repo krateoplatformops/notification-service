@@ -5,4 +5,3 @@ nodemon.json
 test.js
 assets/*
 *.txt
-package-lock.json
