@@ -45,6 +45,8 @@ app.post('/', (req, res) => {
     })
   }
 
+  console.log(req.body)
+
   io.sockets.emit('notifications', req.body)
   res.status(200).json({ message: 'ok' })
 })
