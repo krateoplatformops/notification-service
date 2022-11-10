@@ -3,6 +3,9 @@
 
 replicaCount: 1
 
+labels:
+  component: service
+
 image:
   repository: ghcr.io/krateoplatformops/notification-service
   pullPolicy: IfNotPresent
